@@ -54,7 +54,7 @@ app.use(errorHandler); // other normal error
 
 
 const PORT = process.env.PORT || 9000; // for not making our port public .
-const server = app.listen(9000, '127.0.0.1', console.log(`Server started on port ${PORT}`));
+const server = app.listen(PORT, '127.0.0.1', console.log(`Server started on port ${PORT}`));
 
 // ********************************* SOCKET I/O ************************************** //
      
