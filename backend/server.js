@@ -35,7 +35,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname1, "/frontend/build")));
 
   app.get("*", (req, res) => {
-    
+
     res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"));
   });
 
@@ -69,7 +69,8 @@ const server = app.listen(
 const io = require('socket.io')(server, {
     pingTimeout:60000, //after 60sec it goes the connection off btw user and server. to save bandwidth
     cors: {
-        origin: "http://localhost:3000",
+      //origin: "http://localhost:3000",
+      origin: "*",
     },
 });
 io.on("connection", (socket) => {

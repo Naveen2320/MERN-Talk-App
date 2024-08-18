@@ -13,7 +13,10 @@ import Lottie from "react-lottie";
 import animationData from "../animations/typing.json";
 
 
-const ENDPOINT = "http://localhost:9000";
+//const ENDPOINT = "http://localhost:9000";
+const ENDPOINT = "https://mern-talk-app-7.onrender.com";
+
+
 var socket, selectedChatcompare;
 
 function SingleChat({ fetchAgain, setFetchAgain }) {
