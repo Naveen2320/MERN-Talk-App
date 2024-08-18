@@ -59,9 +59,9 @@ app.use(errorHandler); // other normal error
 const PORT = process.env.PORT;
 
 const server = app.listen(
-  PORT,
-  console.log(`Server running on PORT ${PORT}...`.yellow.bold)
-);
+  PORT, '0.0.0.0', () => {
+    console.log(`Server running on PORT ${PORT}...`.yellow.bold)
+  });
 // ********************************* SOCKET I/O ************************************** //
      
 const io = require('socket.io')(server, {
