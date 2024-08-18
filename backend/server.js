@@ -19,9 +19,9 @@ app.use(express.json()); //to accept json data
 
 
 
-app.get('/', (req, res) => { // creating first js api
-    res.send("API is Running Successfully");
-})
+// app.get('/', (req, res) => { // creating first js api
+//     res.send("API is Running Successfully");
+// })
 
 app.use('/api/user',userRoutes)// all logic for routes related to user inside userRoutesFile
 app.use('/api/chat', chatRoutes)// all logic for chat related to user inside userChatFile
@@ -34,12 +34,14 @@ const __dirname1 = path.resolve();
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname1, "/frontend/build")));
 
-  app.get("*", (req, res) =>
-    res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"))
-  );
+  app.get("*", (req, res) => {
+    
+    res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"));
+  });
+
 } else {
   app.get("/", (req, res) => {
-    res.send("API is running..");
+    res.send("API is running very successfully");
   });
 }
     
