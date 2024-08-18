@@ -60,7 +60,7 @@ const PORT = process.env.PORT;
 
 const server = app.listen(
   PORT, '0.0.0.0', () => {
-    console.log(`Server running on PORT ${PORT}...`.yellow.bold)
+    console.log(`Server running on PORT ${PORT}...`)
   });
 // ********************************* SOCKET I/O ************************************** //
      
