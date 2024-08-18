@@ -53,9 +53,15 @@ app.use(notFound);// for routes not found
 app.use(errorHandler); // other normal error
 
 
-const PORT = process.env.PORT || 9000; // for not making our port public .
-const server = app.listen(PORT, '127.0.0.1', console.log(`Server started on port ${PORT}`));
+// const PORT = process.env.PORT || 9000; // for not making our port public .
+// const server = app.listen(PORT, '127.0.0.1', console.log(`Server started on port ${PORT}`));
 
+const PORT = process.env.PORT;
+
+const server = app.listen(
+  PORT,
+  console.log(`Server running on PORT ${PORT}...`.yellow.bold)
+);
 // ********************************* SOCKET I/O ************************************** //
      
 const io = require('socket.io')(server, {
