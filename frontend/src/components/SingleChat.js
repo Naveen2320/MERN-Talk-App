@@ -241,10 +241,30 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
                       
                 </>) : (
                     <Box display="flex" alignItems="center" justifyContent="center" h="100%">
-                        <Text fontSize="3xl" pb={3} fontFamily={"work sans"}>
+                        <Text fontSize="3xl" pb={3} color ="green" fontFamily={"work sans"}>
                             Click on a Friend to start Chatting
                         </Text>
-                    </Box>
+                    </Box> 
+
+        //               <Box display="flex" alignItems="center" justifyContent="center" h="100%">
+        //     {/* Display only on small screens */}
+        //     <Box display={["block", "block", "none"]}>
+        //         <Text fontSize="3xl" pb={3} fontFamily={"work sans"}>
+        //             Click on a Friend to start Chatting
+        //         </Text>
+        //     </Box>
+
+        //     {/* Display on medium and larger screens */}
+        //     <Box display={["none", "none", "block"]}>
+        //         <Text fontSize="3xl" pb={3} fontFamily={"work sans"}>
+        //             Click on a Friend to start Chatting
+        //         </Text>
+        //         {/* Render the Chats */}
+        //         {/* Example: <Chats /> */}
+        //     </Box>
+        // </Box>
+
+                    
                 
             )}
         </>

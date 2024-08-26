@@ -122,20 +122,22 @@ function SideDrawer() {
         display="flex"
         justifyContent="space-between"
         alignItems="center"
-        bg="white"
+        bg="#0059ff"
+       
         w="100%"
-        p="5px 10px 5px 10px"
+        p={{ base: "5px", md: "10px" }}
         borderWidth="5px"
       >
         <Tooltip label="Search Users to chat" hasArrow placement="bottom-end">
-          <Button variant="ghost" onClick={onOpen}>
+          <Button variant="ghost" onClick={onOpen}   display={{ base: "block", md: "flex" }} 
+                px={{ base: 2, md: 4 }}>
             <i className="fas fa-search"></i>
-            <Text d={{ base: "none", md: "flex" }} px={4}>
+            <Text display={{ base: "none", md: "inline" }} ml={2} >
               Search User
             </Text>
           </Button>
         </Tooltip>
-        <Text fontSize="2xl" fontFamily="Work sans">
+        <Text  fontSize={{ base: "xl", md: "2xl" }}  fontFamily="Work sans">
           Talk-A-Tive
         </Text>
         <div>
@@ -169,7 +171,7 @@ function SideDrawer() {
 
           </Menu>
           <Menu>
-            <MenuButton as={Button} bg="white" rightIcon={<ChevronDownIcon />}>
+            <MenuButton as={Button} bg="#008080" rightIcon={<ChevronDownIcon />}>
               <Avatar
                 size="sm"
                 cursor="pointer"
@@ -188,7 +190,7 @@ function SideDrawer() {
         </div>
       </Box>
 
-      <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
+      <Drawer placement={{ base: "bottom", md: "left" }}  onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerHeader borderBottomWidth="1px">Search Users</DrawerHeader>

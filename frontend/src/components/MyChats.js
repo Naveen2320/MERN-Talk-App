@@ -47,32 +47,36 @@ const MyChats = ({fetchAgain}) => {
     // eslint-disable-next-line
   }, [fetchAgain]);
 
-return (
+
+  return (
+
     <Box
-      display={{ base: selectedChat ? "none" : "flex", md: "flex" }}
-      flexDir="column"
-      alignItems="center"
-      padding={3}
-      bg="white"
-      w={{ base: "100%", md: "31%" }}
-      borderRadius="lg"
-      borderWidth="1px"
-    >
+    display={{ base: selectedChat ? "none" : "flex", md: "flex" }}
+  flexDir="column"
+  alignItems="center"
+  p={{ base: 2, md: 4 }}
+  bg="aqua"
+  w={{ base: "100%", sm: "80%", md: "60%", lg: "41%" }}
+  borderRadius="lg"
+  borderWidth="1px"
+>
+     
       <Box
         pb={3}
         px={3}
-        fontSize={{ base: "28px", md: "30px" }}
+        fontSize={{ base: "28px", md: "25px" }}
         fontFamily="Work sans"
         display="flex"
         w="100%"
         justifyContent="space-between"
         alignItems="center"
+        fontWeight="bold"
       >
-            My Chats
+        CHATS
 
         <GroupChatmodal> 
             <Button
-            fontSize={{ base: "17px", md: "10px", lg: "17px" }}
+            fontSize={{ base: "19px", md: "8px", lg: "19px" }}
             rightIcon={<AddIcon />}
             >
             New Group Chat
