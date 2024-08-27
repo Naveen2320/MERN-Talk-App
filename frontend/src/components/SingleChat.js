@@ -11,6 +11,8 @@ import ScrollableChat from "./ScrollableChat";
 import io from "socket.io-client";
 import Lottie from "react-lottie";
 import animationData from "../animations/typing.json";
+import EmojiPicker from 'emoji-picker-react';
+import { BsEmojiSmile ,BsSend } from 'react-icons/bs'; // For the emoji icon button
 
 
 //const ENDPOINT = "http://localhost:9000";
@@ -27,6 +29,7 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
     const [socketConnected, setSocketConnected] = useState(false);
     const [typing, setTyping] = useState(false);
     const [isTyping, setIsTyping] = useState(false);
+    const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
     const defaultOptions = {
         loop: true,
@@ -162,6 +165,11 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
     }, timerLength);
     };
 
+    const onEmojiClick = (event, emojiObject) => {
+    setNewMessage(prevInput => prevInput + emojiObject.emoji);
+    };
+
+
     return (
         <>
             {selectedChat ? (
@@ -220,18 +228,43 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
                             </div>
                                 
                         )} 
-                        <FormControl onKeyDown={sendMessage} isRequired mt={3}>
+                         {/* onKeyDown={sendMessage} */}
+                        <FormControl isRequired mt={3}>
                             {isTyping ? <div>
                                 <Lottie
                                 options = {defaultOptions}
                                 width={70} style={{ marginBottom: 15, marginLeft: 0 }} />
                                 
-                            </div>:<></>}
-                            <Input placeholder="Enter a message.."
+                            </div> : <></>}
+                               <Box display="flex" alignItems="center">
+                                <IconButton
+                                    icon={<BsEmojiSmile />}
+                                    onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+                                    variant="ghost"
+                                    size="lg"
+                                    aria-label="Show emoji picker"
+                                    mr={2}
+                                />
+                                {showEmojiPicker && (
+                                    <Box position="absolute" bottom="60px" zIndex="1000">
+                                        <EmojiPicker onEmojiClick={onEmojiClick} />
+                                    </Box>
+                                )}
+                                <Input placeholder="Enter a message.."
                                 variant="filled" bg="#E0E0E0"
                                 onChange={typingHandler}
-                                value={newMessage}
-                            />
+                                    value={newMessage}
+                                    flex="1" mr={2}
+                                />
+                                 <IconButton
+                                    icon={<BsSend />}
+                                    onClick={sendMessage}
+                                    variant="solid"
+                                    colorScheme="blue"
+                                    aria-label="Send message"
+                                />
+                                
+                            </Box>
                             
                         </FormControl>
 
