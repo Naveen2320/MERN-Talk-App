@@ -207,17 +207,13 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
     // setNewMessage(prevInput => prevInput + emojiObject.emoji);
     // };
 
-      const onEmojiClick = (event, emojiObject) => {
-        console.log("Emoji Object:", emojiObject);
-        if (emojiObject && emojiObject.emoji) {
-            setNewMessage(prevInput => {
-                console.log("Previous Input:", prevInput);
-                console.log("New Input:", prevInput + emojiObject.emoji);
-                return prevInput + emojiObject.emoji;
-            });
-        } else {
-            console.error("Emoji object is undefined or missing 'emoji' property");
-        }
+    const onEmojiClick = (emojiData, event) => {
+    if (emojiData && emojiData.emoji) {
+        setNewMessage(prevInput => prevInput + emojiData.emoji);
+    } else {
+        console.error("Emoji object is undefined or missing 'emoji' property");
+    }
+    
 };
 
     return (
