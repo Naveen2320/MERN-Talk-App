@@ -25,7 +25,7 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
 
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [newMessage, setNewMessage] = useState();
+    const [newMessage, setNewMessage] = useState("");
     const [socketConnected, setSocketConnected] = useState(false);
     const [typing, setTyping] = useState(false);
     const [isTyping, setIsTyping] = useState(false);
@@ -207,12 +207,17 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
     // setNewMessage(prevInput => prevInput + emojiObject.emoji);
     // };
 
-    const onEmojiClick = (event, emojiObject) => {
-    if (emojiObject && emojiObject.emoji) {
-        setNewMessage(prevInput => prevInput + emojiObject.emoji);
-    } else {
-        console.error("Emoji object is undefined or missing 'emoji' property");
-    }
+      const onEmojiClick = (event, emojiObject) => {
+        console.log("Emoji Object:", emojiObject);
+        if (emojiObject && emojiObject.emoji) {
+            setNewMessage(prevInput => {
+                console.log("Previous Input:", prevInput);
+                console.log("New Input:", prevInput + emojiObject.emoji);
+                return prevInput + emojiObject.emoji;
+            });
+        } else {
+            console.error("Emoji object is undefined or missing 'emoji' property");
+        }
 };
 
     return (
