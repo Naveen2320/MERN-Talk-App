@@ -107,40 +107,78 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
         });
     })
 
-    const sendMessage = async(event) => {
-        if (event.key === "Enter" && newMessage) {
-            socket.emit("stop typing", selectedChat._id);
-            try {
-                const config = {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${user.token}`,
-                    },
-                };
-                setNewMessage("");
-                const { data } = await axios.post("/api/message", {
-                    content: newMessage,
-                    chatId: selectedChat._id,
-                }, config
-                );
+    // const sendMessage = async(event) => {
+    //     if (event.key === "Enter" && newMessage) {
+    //         socket.emit("stop typing", selectedChat._id);
+    //         try {
+    //             const config = {
+    //                 headers: {
+    //                     "Content-Type": "application/json",
+    //                     Authorization: `Bearer ${user.token}`,
+    //                 },
+    //             };
+    //             setNewMessage("");
+    //             const { data } = await axios.post("/api/message", {
+    //                 content: newMessage,
+    //                 chatId: selectedChat._id,
+    //             }, config
+    //             );
 
-                //console.log(data);
+    //             //console.log(data);
 
-                socket.emit("new message", data);
-                setMessages([...messages, data]);
-        }
-            catch (error) {
+    //             socket.emit("new message", data);
+    //             setMessages([...messages, data]);
+    //     }
+    //         catch (error) {
+    //         toast({
+    //       title: "Error Occured!",
+    //       description: "Failed to send the Message",
+    //       status: "error",
+    //       duration: 5000,
+    //       isClosable: true,
+    //       position: "bottom",
+    //     });
+    //         }
+    //     }
+    // };
+    const sendMessage = async () => {
+    if (newMessage.trim()) { // Check if the message is not empty or just whitespace
+        socket.emit("stop typing", selectedChat._id);
+        try {
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${user.token}`,
+                },
+            };
+            setNewMessage("");
+            const { data } = await axios.post("/api/message", {
+                content: newMessage,
+                chatId: selectedChat._id,
+            }, config);
+
+            socket.emit("new message", data);
+            setMessages([...messages, data]);
+        } catch (error) {
             toast({
-          title: "Error Occured!",
-          description: "Failed to send the Message",
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-          position: "bottom",
-        });
-            }
+                title: "Error Occured!",
+                description: "Failed to send the Message",
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom",
+            });
         }
+    }
     };
+    
+    // Call sendMessage on key press
+    const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+        e.preventDefault(); // Prevents the default behavior of the Enter key
+        sendMessage();
+    }
+};
 
 
     const typingHandler = (e) => {
@@ -165,10 +203,17 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
     }, timerLength);
     };
 
-    const onEmojiClick = (event, emojiObject) => {
-    setNewMessage(prevInput => prevInput + emojiObject.emoji);
-    };
+    // const onEmojiClick = (event, emojiObject) => {
+    // setNewMessage(prevInput => prevInput + emojiObject.emoji);
+    // };
 
+    const onEmojiClick = (event, emojiObject) => {
+    if (emojiObject && emojiObject.emoji) {
+        setNewMessage(prevInput => prevInput + emojiObject.emoji);
+    } else {
+        console.error("Emoji object is undefined or missing 'emoji' property");
+    }
+};
 
     return (
         <>
@@ -255,6 +300,7 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
                                 onChange={typingHandler}
                                     value={newMessage}
                                     flex="1" mr={2}
+                                    onKeyDown={handleKeyDown} // Handle Enter key press
                                 />
                                  <IconButton
                                     icon={<BsSend />}
