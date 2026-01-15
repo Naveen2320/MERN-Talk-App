@@ -3,7 +3,7 @@
 
 Talk-Tive is a real-time chat web application built using the **MERN stack** and **Socket.io**, enabling instant, two-way communication between users. The platform supports secure authentication, one-on-one and group chats, and persistent message storage — similar to WhatsApp Web or Slack.
 
----
+--- 
 
 ## 🚀 Problem Statement
 
